@@ -23,6 +23,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 * Plotly or Matplotlib for visual endpoints<br>
 
 <h3>⚙️ Key Functionalities</h3>
+
 | Task                 | Tool       | Outcome                         |
 | -------------------- | ---------- | ------------------------------- |
 | Load to SQLite       | SQLAlchemy | Fast, simple local DB           |
