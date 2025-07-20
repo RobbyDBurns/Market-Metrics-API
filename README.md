@@ -36,7 +36,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 | `POST /portfolio`                          | Return the Portfolio object in the documented format |
 
 <h3>Important:</h3>
-:app
+
 * `http://localhost:8000/docs`
 * `source venv/bin/activate`
 * `uvicorn app.main:app --reload`
