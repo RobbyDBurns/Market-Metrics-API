@@ -59,7 +59,7 @@ def get_correlation_matrix():
 def get_sharpe_ratio(symbol: str):
     return 0
 
-# Return a chart of price + moving averages
+# Return a chart of price + moving averagesd
 @app.get("/chart/{symbol}")
 def get_chart(symbol: str):
     return 0
