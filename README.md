@@ -35,4 +35,5 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 | `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
 
 <h3>Important:</h3>
+
 * `http://localhost:8000/docs`
