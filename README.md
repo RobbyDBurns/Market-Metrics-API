@@ -22,6 +22,14 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 * Pytest (testing)<br>
 * Plotly or Matplotlib for visual endpoints<br>
 
+<h3>⚙️ Key Functionalities</h3>
+| Task                 | Tool       | Outcome                         |
+| -------------------- | ---------- | ------------------------------- |
+| Load to SQLite       | SQLAlchemy | Fast, simple local DB           |
+| Save as Parquet      | PySpark    | Scalable for big data pipelines |
+| Visualize Indicators | Matplotlib | Save charts as PNGs             |
+
+
 <h3>🛤️ Endpoints</h3>
 
 | Endpoint                                   | Description                                                  |
