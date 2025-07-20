@@ -2,7 +2,8 @@
 A Real-Time Financial ETL (Extract, Transform, Load) Pipeline.<br>
 Used to fetch stock/ETF data from the web, computes useful metrics, and exposes clean/documented endpoints.
 
-🧠 Concept Overview
+<h3>Concept Overview</h3>
+
 * A modular system that:
 * Extracts real-world market data (stocks, ETFs, crypto)
 * Transforms it (cleansing, aggregating, computing metrics)
@@ -10,7 +11,8 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 * Serves it via a FastAPI analytics interface
 * (Stretch) Streams live updates with Kafka or schedules with Airflow
 
-Tech Stack:<br>
+<h3>Tech Stack</h3>
+
 * Python 3.11+<br>
 * FastAPI (main web framework)<br>
 * pandas, numpy (data wrangling and math)<br>
@@ -19,6 +21,8 @@ Tech Stack:<br>
 * Docker (containerized deployment)<br>
 * Pytest (testing)<br>
 * Optional: Plotly or Matplotlib for visual endpoints<br>
+
+<h3>Endpoints</h3>
 
 | Endpoint                                   | Description                                          |
 | ------------------------------------------ | ---------------------------------------------------- |
@@ -30,5 +34,5 @@ Tech Stack:<br>
 | `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
 | `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
 
-Important:
+<h3>Important:</h3>
 * `http://localhost:8000/docs`
