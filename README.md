@@ -1,2 +1,11 @@
 # Market-Metrics-API
 Used to fetch stock/ETF data from the web, computes useful metrics, and exposes clean/documented endpoints
+| Endpoint                                   | Description                                          |
+| ------------------------------------------ | ---------------------------------------------------- |
+| `GET /health`                              | Health check                                         |
+| `GET /metrics/{symbol}`                    | Get key metrics for a given symbol (e.g., AAPL)      |
+| `GET /moving-average/{symbol}?window=30`   | Compute and return moving average                    |
+| `GET /volatility/{symbol}`                 | Return rolling volatility over time                  |
+| `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                |
+| `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
+| `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
