@@ -17,10 +17,10 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 * FastAPI (main web framework)<br>
 * pandas, numpy (data wrangling and math)<br>
 * yfinance or Alpha Vantage API (data source)<br>
-* SQLAlchemy + SQLite or PostgreSQL (optional for caching/persistence)<br>
+* SQLAlchemy + SQLite or PostgreSQL (for caching/persistence)<br>
 * Docker (containerized deployment)<br>
 * Pytest (testing)<br>
-* Optional: Plotly or Matplotlib for visual endpoints<br>
+* Plotly or Matplotlib for visual endpoints<br>
 
 <h3>Endpoints</h3>
 
@@ -32,7 +32,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 | `GET /volatility/{symbol}`                 | Return rolling volatility over time                  |
 | `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                |
 | `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
-| `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
+| `GET /chart/{symbol}`                      | Return a chart of price + moving averages            |
 | `POST /portfolio`                          | Return the Portfolio object in the documented format |
 
 <h3>Important:</h3>
