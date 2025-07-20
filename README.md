@@ -1,5 +1,8 @@
 # Market-Metrics-API
+
 Used to fetch stock/ETF data from the web, computes useful metrics, and exposes clean/documented endpoints.
+MarketFlow, A Real-Time Financial ETL Pipeline
+
 
 Tech Stack:<br>
 * Python 3.11+<br>
