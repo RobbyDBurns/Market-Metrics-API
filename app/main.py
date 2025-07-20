@@ -1,8 +1,15 @@
 #!python3
 
+# ASGI acts as either synchronous or asynchronous web application standard
+# uvicorn is a lightweight, high-performance ASGI server
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
+import app.etl.extract as extract
+import app.etl.transform as transform
+import app.etl.load as load
+
 
 app = FastAPI()
 
@@ -12,7 +19,20 @@ class Portfolio(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to Market Metrics API"}
+    return {"message": "Welcome to MarketFlow ETL API"}
+
+@app.get("/etl/{symbol}")
+def get_etl(symbol: str, window: str):
+    df = extract.get_historical_data(symbol)
+    df = transform.add_moving_average(df, window)
+    df = transform.get_volatility(df, window)
+    file_path = load.save_to_csv(df, symbol)
+
+    return {
+        "message": f"ETL complete for {symbol}",
+        "data_points": len(df),
+        "saved_to": file_path
+    }
 
 # Health Check
 @app.get("/health")
