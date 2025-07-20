@@ -20,3 +20,6 @@ Tech Stack:<br>
 | `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                |
 | `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
 | `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
+
+Important:
+* `http://localhost:8000/docs`
