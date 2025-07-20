@@ -24,17 +24,17 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 
 <h3>🛤️ Endpoints</h3>
 
-| Endpoint                                   | Description                                          |
-| ------------------------------------------ | ---------------------------------------------------- |
-| `GET /health`                              | Health check                                         |
-| `GET /etl/{symbol}`                        | Demonstrates extract, transform, and load using df   |
-| `GET /metrics/{symbol}`                    | Get key metrics for a given symbol (e.g., AAPL)      |
-| `GET /moving-average/{symbol}?window=30`   | Compute and return moving average                    |
-| `GET /volatility/{symbol}`                 | Return rolling volatility over time                  |
-| `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                |
-| `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
-| `GET /chart/{symbol}`                      | Return a chart of price + moving averages            |
-| `POST /portfolio`                          | Return the Portfolio object in the documented format |
+| Endpoint                                   | Description                                                  |
+| ------------------------------------------ | ----------------------------------------------------         |
+| `GET /health`                              | Health check                                                 |
+| `GET /etl/{symbol}`                        | Demonstrates extract, transform, and load using df into csv  |
+| `GET /metrics/{symbol}`                    | Get key metrics for a given symbol (e.g., AAPL)              |
+| `GET /moving-average/{symbol}?window=30`   | Compute and return moving average                            |
+| `GET /volatility/{symbol}`                 | Return rolling volatility over time                          |
+| `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                        |
+| `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                           |
+| `GET /chart/{symbol}`                      | Return a chart of price + moving averages                    |
+| `POST /portfolio`                          | Return the Portfolio object in the documented format         |
 
 <h3>Important:</h3>
 
