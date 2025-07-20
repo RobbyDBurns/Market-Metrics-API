@@ -1,5 +1,5 @@
 # MarketFlow
-A Real-Time Financial ETL Pipeline.<br>
+A Real-Time Financial ETL (Extract, Transform, Load) Pipeline.<br>
 Used to fetch stock/ETF data from the web, computes useful metrics, and exposes clean/documented endpoints.
 
 
