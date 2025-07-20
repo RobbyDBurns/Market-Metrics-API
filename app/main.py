@@ -4,11 +4,13 @@
 # uvicorn is a lightweight, high-performance ASGI server
 
 from fastapi import FastAPI
+from fastapi import Query
 from pydantic import BaseModel
 from typing import List
 import app.etl.extract as extract
 import app.etl.transform as transform
 import app.etl.load as load
+import app.etl.plot as plot
 
 
 app = FastAPI()
@@ -22,11 +24,14 @@ def read_root():
     return {"message": "Welcome to MarketFlow ETL API"}
 
 @app.get("/etl/{symbol}")
-def get_etl(symbol: str, window: str):
+def get_etl(symbol: str, window: int = Query(7, ge=1, le=60)): #window is bounded between 1 and 60
     df = extract.get_historical_data(symbol)
     df = transform.add_moving_average(df, window)
-    df = transform.get_volatility(df, window)
+    df = transform.add_volatility(df, window)
     file_path = load.save_to_csv(df, symbol)
+    load.save_to_db(df, symbol)
+    load.save_parquet_with_spark(df, symbol)
+    plot.plot_indicators(df, symbol)
 
     return {
         "message": f"ETL complete for {symbol}",
