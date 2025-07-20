@@ -33,6 +33,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 | `GET /correlation?symbols=AAPL,MSFT,GOOGL` | Compute and return correlation matrix                |
 | `GET /sharpe-ratio/{symbol}`               | Sharpe ratio based on last 90 days                   |
 | `GET /chart/{symbol}`                      | Return a chart of price + moving averages (optional) |
+| `POST /portfolio`                          | Return the Portfolio object in the documented format |
 
 <h3>Important:</h3>
 
