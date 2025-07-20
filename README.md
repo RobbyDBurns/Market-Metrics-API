@@ -27,6 +27,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 | Endpoint                                   | Description                                          |
 | ------------------------------------------ | ---------------------------------------------------- |
 | `GET /health`                              | Health check                                         |
+| `GET /etl/{symbol}`                        | Demonstrates extract, transform, and load using df   |
 | `GET /metrics/{symbol}`                    | Get key metrics for a given symbol (e.g., AAPL)      |
 | `GET /moving-average/{symbol}?window=30`   | Compute and return moving average                    |
 | `GET /volatility/{symbol}`                 | Return rolling volatility over time                  |
