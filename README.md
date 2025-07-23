@@ -7,7 +7,7 @@ Used to fetch stock/ETF data from the web, computes useful metrics, and exposes 
 * A modular system that:
 * Extracts real-world market data (stocks, ETFs, crypto)
 * Transforms it (cleansing, aggregating, computing metrics)
-* Loads it into a data store (e.g., PostgreSQL or Parquet on S3)
+* Loads it into a data store (Parquet on S3)
 * Serves it via a FastAPI analytics interface
 * (Stretch) Streams live updates with Kafka or schedules with Airflow
 
