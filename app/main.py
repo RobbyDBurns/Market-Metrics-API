@@ -12,6 +12,9 @@ import app.etl.transform as transform
 import app.etl.load as load
 import app.etl.plot as plot
 
+MIN_WINDOW = 7
+MAX_WINDOW = 252
+DEFAULT_WINDOW = 30
 
 app = FastAPI()
 
@@ -24,7 +27,7 @@ def read_root():
     return {"message": "Welcome to MarketFlow ETL API"}
 
 @app.get("/etl/{symbol}")
-def get_etl(symbol: str, window: int = Query(7, ge=1, le=60)): #window is bounded between 1 and 60
+def get_etl(symbol: str, window: int = Query(DEFAULT_WINDOW, ge=MIN_WINDOW, le=MAX_WINDOW)): #window is bounded between 1 and 60
     df = extract.get_historical_data(symbol)
     df = transform.add_moving_average(df, window)
     df = transform.add_volatility(df, window)
@@ -58,9 +61,40 @@ def get_moving_average(symbol: str):
     return 0
 
 # Return rolling volatility over time
+# Volatility - How much a stock's price fluctuates
+# Rolling Volatility - standard deviation (spread of data) of log returns over a window of a stock's fluctuation
+# For annualized: rolling_vol = log_returns.rolling(window=20).std() * np.sqrt(252)
+# - 252 trading days in a year
+# A log return (or logarithmic return) measures the percentage change in price between two time periods, 
+# but it does so using natural logarithms instead of simple arithmetic.
+# log_returns = np.log(df["Close"] / df["Close"].shift(1))
+# - today's close over yesterday's close
+# - Simple return = (110 - 100)/100 = 0.10 -> 10%
+# - Log return = ln(110/100) = ~ 0.0953 -> 9.53%, measure relative change not raw change
+# -- Log return is mathematically additive, meaning you can sum log returns over time to get the total log return
+# Loads a PNG line plot
 @app.get("/volatility/{symbol}")
-def get_volatility(symbol: str):
-    return 0
+def get_volatility(symbol: str, window: int = Query(DEFAULT_WINDOW, ge=MIN_WINDOW, le=MAX_WINDOW),
+                    annualized: bool = False):
+    df = extract.get_historical_data(symbol)
+    df = transform.add_volatility(df, window, annualized)
+
+    file_path = plot.plot_rolling_volatility(df, symbol, window, annualized)
+
+    return {
+        "message": f"Generating rolling volatility for {symbol}",
+        "window": window,
+        "image_path": file_path,
+        "data": [
+            {
+                "date": str(date),
+                "volatility": round(vol, 6) if vol == vol else None 
+            }
+            for date, vol in zip(df["Date"], df["Volatility"])
+        ]
+
+    }
+
 
 # Compute and return correlation matrix
 @app.get("/correlation?symbols=AAPL,MSFT,GOOGL")
