@@ -31,7 +31,7 @@ def get_etl(symbol: str, window: int = Query(DEFAULT_WINDOW, ge=MIN_WINDOW, le=M
     df = extract.get_historical_data(symbol)
     df = transform.add_moving_average(df, window)
     df = transform.add_volatility(df, window)
-    file_path = load.save_to_csv(df, symbol)
+    file_path = load.save_to_csv(df, symbol, "etl")
     load.save_to_db(df, symbol)
     load.save_parquet_with_spark(df, symbol)
     plot.plot_indicators(df, symbol)
@@ -56,9 +56,21 @@ def get_metrics(symbol: str):
     }
 
 # Compute and return moving average
-@app.get("/moving-average/{symbol}?window=30")
-def get_moving_average(symbol: str):
-    return 0
+@app.get("/moving-average/{symbol}")
+def get_moving_average(symbol: str, window: int = Query(DEFAULT_WINDOW, ge=DEFAULT_WINDOW, le=MAX_WINDOW)): 
+    # window is bounded between 30 and 252
+    df = extract.get_historical_data(symbol)
+    df = transform.add_moving_average(df, window)
+    file_path = load.save_to_csv(df, symbol, "moving_average")
+    load.save_to_db(df, symbol)
+    load.save_parquet_with_spark(df, symbol)
+    plot.plot_moving_average(df, symbol)
+
+    return {
+        "message": f"moving average complete for {symbol}",
+        "data_points": len(df),
+        "saved_to": file_path
+    }
 
 # Return rolling volatility over time
 # Volatility - How much a stock's price fluctuates
@@ -92,7 +104,6 @@ def get_volatility(symbol: str, window: int = Query(DEFAULT_WINDOW, ge=MIN_WINDO
             }
             for date, vol in zip(df["Date"], df["Volatility"])
         ]
-
     }
 
 

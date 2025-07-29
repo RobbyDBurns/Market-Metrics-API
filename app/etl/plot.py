@@ -15,7 +15,18 @@ def plot_indicators(df: DataFrame, symbol: str):
     plt.savefig(f"data/{symbol}_chart.png")
     plt.close()
 
-def plot_rolling_volatility(df: DataFrame, symbol: str, window: int=7, annualized: bool=False):
+def plot_moving_average(df: DataFrame, symbol: str): 
+    plt.figure(figsize=(12,6))
+    plt.plot(df["Date"], df["MA"], label="Moving Average")
+    plt.title(f"{symbol} Moving Average")
+    plt.xlabel("Date")
+    plt.ylabel("Price")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(f"data/{symbol}_moving_average.png")
+    plt.close()
+
+def plot_rolling_volatility(df: DataFrame, symbol: str, window: int = 7, annualized: bool = False):
     file_path = f"data/{symbol.upper()}_volatility_chart.png"
 
     plt.figure(figsize=(10,5))

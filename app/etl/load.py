@@ -9,9 +9,9 @@ from pyspark.sql import SparkSession
 # like spreadsheets or databases. Each line in a CSV file represents a row, and the values within 
 # each row are separated by commas. This makes it a widely compatible format for exchanging data 
 # between different applications. 
-def save_to_csv(df: DataFrame, symbol: str) -> str:
+def save_to_csv(df: DataFrame, symbol: str, statistics: str) -> str:
     makedirs("data", exist_ok=True)
-    path = f"data/{symbol.upper()}_processed.csv"
+    path = f"data/{symbol.upper()}_{statistics}.csv"
     df.to_csv(path, index=False)
     return path
 
@@ -19,8 +19,13 @@ def save_to_db(df: DataFrame, symbol: str):
     engine = get_engine()
     df.to_sql(symbol, con=engine, if_exists="replace", index=False)
 
+# will want to use cx_Oracle
+def save_to_oracle_db(df: DataFrame, symbol: str):
+    return 0
+
 # A parquet is an open-source, columnar (column by column) storage file format specifically designed 
-# for efficient data storage and retrieval in big data processing and analytics.  
+# for efficient data storage and retrieval in big data (batch) processing and analytics.
+# No real time query  
 def save_parquet_with_spark(df: DataFrame, filename: str):
     spark = SparkSession.builder.appName("ETL").getOrCreate()
     spark_df = spark.createDataFrame(df)
